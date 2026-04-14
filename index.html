@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simone Sanseverino — Full Stack Web Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #f7f5f2;
+        --surface: #ffffff;
+        --text: #1a1a18;
+        --muted: #6b6b65;
+        --border: rgba(26, 26, 24, 0.1);
+        --accent: #b5622e;
+        --accent-light: #f5efe6;
+        --tag-bg: #efefeb;
+        --tag-text: #4a4a45;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        font-size: 16px;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: rgba(247, 245, 242, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 0 2rem;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .nav-logo {
+        font-family: "DM Serif Display", serif;
+        font-size: 18px;
+        color: var(--text);
+        text-decoration: none;
+      }
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+      .nav-links a {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--muted);
+        text-decoration: none;
+        letter-spacing: 0.03em;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--text);
+      }
+
+      /* MAIN */
+      main {
+        padding-top: 56px;
+      }
+
+      /* HERO */
+      .hero {
+        min-height: 92vh;
+        display: flex;
+        align-items: center;
+        padding: 5rem 2rem 4rem;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .hero-inner {
+        width: 100%;
+      }
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.5rem;
+        opacity: 0;
+        animation: fadeUp 0.6s ease forwards 0.1s;
+      }
+      .dot-live {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        animation: pulse 2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(0.8);
+        }
+      }
+      .hero h1 {
+        font-family: "DM Serif Display", serif;
+        font-size: clamp(42px, 7vw, 82px);
+        line-height: 1.05;
+        color: var(--text);
+        margin-bottom: 1.5rem;
+        opacity: 0;
+        animation: fadeUp 0.7s ease forwards 0.2s;
+      }
+      .hero h1 em {
+        font-style: italic;
+        color: var(--accent);
+      }
+      .hero-bio {
+        font-size: 17px;
+        color: var(--muted);
+        max-width: 540px;
+        line-height: 1.75;
+        margin-bottom: 2rem;
+        font-weight: 300;
+        opacity: 0;
+        animation: fadeUp 0.7s ease forwards 0.35s;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        opacity: 0;
+        animation: fadeUp 0.7s ease forwards 0.45s;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s;
+        cursor: pointer;
+      }
+      .btn-primary {
+        background: var(--text);
+        color: var(--bg);
+        border: 1px solid var(--text);
+      }
+      .btn-primary:hover {
+        background: var(--accent);
+        border-color: var(--accent);
+      }
+      .btn-outline {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+      .btn-outline:hover {
+        border-color: var(--text);
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* SECTIONS */
+      section {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 5rem 2rem;
+        border-top: 1px solid var(--border);
+      }
+      .section-label {
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        margin-bottom: 2.5rem;
+      }
+
+      /* ABOUT */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: start;
+      }
+      .about-text {
+        font-size: 17px;
+        color: var(--text);
+        line-height: 1.8;
+        font-weight: 300;
+      }
+      .about-text strong {
+        font-weight: 500;
+      }
+      .about-aside {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .aside-item {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 14px 16px;
+        background: var(--surface);
+        border-radius: 8px;
+        border: 1px solid var(--border);
+      }
+      .aside-key {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--muted);
+        font-weight: 500;
+      }
+      .aside-val {
+        font-size: 14px;
+        color: var(--text);
+        font-weight: 400;
+      }
+
+      /* SKILLS */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px;
+      }
+      .skill-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 16px;
+        transition: border-color 0.2s;
+      }
+      .skill-card:hover {
+        border-color: var(--accent);
+      }
+      .skill-cat {
+        font-size: 10px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent);
+        margin-bottom: 8px;
+      }
+      .skill-list {
+        font-size: 13px;
+        color: var(--text);
+        line-height: 1.7;
+      }
+
+      /* PROJECT */
+      .project-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .project-top {
+        padding: 2rem 2rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .project-badge {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--accent);
+        background: var(--accent-light);
+        padding: 3px 10px;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+      }
+      .project-title {
+        font-family: "DM Serif Display", serif;
+        font-size: 36px;
+        color: var(--text);
+        margin-bottom: 0.75rem;
+        line-height: 1.1;
+      }
+      .project-desc {
+        font-size: 15px;
+        color: var(--muted);
+        max-width: 620px;
+        line-height: 1.75;
+        font-weight: 300;
+      }
+      .project-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1px;
+        background: var(--border);
+      }
+      .feature {
+        background: var(--surface);
+        padding: 1.25rem 1.5rem;
+      }
+      .feature-icon {
+        font-size: 20px;
+        margin-bottom: 8px;
+        display: block;
+      }
+      .feature-title {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text);
+        margin-bottom: 4px;
+      }
+      .feature-desc {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .project-stack {
+        padding: 1rem 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        border-top: 1px solid var(--border);
+      }
+      .stack-label {
+        font-size: 11px;
+        color: var(--muted);
+        margin-right: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-weight: 500;
+      }
+      .tag {
+        font-size: 12px;
+        color: var(--tag-text);
+        background: var(--tag-bg);
+        padding: 3px 10px;
+        border-radius: 4px;
+      }
+
+      /* CONTACT */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: center;
+      }
+      .contact-heading {
+        font-family: "DM Serif Display", serif;
+        font-size: 32px;
+        line-height: 1.2;
+        color: var(--text);
+        margin-bottom: 1rem;
+      }
+      .contact-sub {
+        font-size: 15px;
+        color: var(--muted);
+        font-weight: 300;
+        line-height: 1.7;
+      }
+      .contact-links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .contact-link-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        text-decoration: none;
+        transition: border-color 0.2s;
+      }
+      .contact-link-row:hover {
+        border-color: var(--accent);
+      }
+      .contact-link-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--muted);
+        font-weight: 500;
+        min-width: 60px;
+      }
+      .contact-link-val {
+        font-size: 14px;
+        color: var(--text);
+      }
+
+      /* FOOTER */
+      footer {
+        text-align: center;
+        padding: 2rem;
+        font-size: 12px;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 640px) {
+        .about-grid,
+        .contact-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .nav-links {
+          display: none;
+        }
+        .hero {
+          min-height: auto;
+          padding-top: 4rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a class="nav-logo" href="#">SS</a>
+      <div class="nav-links">
+        <a href="#about">Chi sono</a>
+        <a href="#skills">Competenze</a>
+        <a href="#project">Progetto</a>
+        <a href="#contact">Contatti</a>
+      </div>
+    </nav>
+
+    <main>
+      <!-- HERO -->
+      <div class="hero">
+        <div class="hero-inner">
+          <div class="hero-eyebrow">
+            <span class="dot-live"></span>
+            Disponibile per nuove opportunità
+          </div>
+          <h1>Simone<br /><em>Sanseverino</em></h1>
+          <p class="hero-bio">
+            Full Stack Web Developer con base in PHP, Laravel, MySQL e
+            JavaScript. Shopify Partner. Appassionato di tecnologia e sempre
+            orientato al risultato.
+          </p>
+          <div class="hero-actions">
+            <a
+              class="btn btn-primary"
+              href="mailto:simonesanseverino45@gmail.com"
+              >Contattami</a
+            >
+            <a
+              class="btn btn-outline"
+              href="https://github.com/simonesanseverino96"
+              target="_blank"
+              >GitHub</a
+            >
+            <a
+              class="btn btn-outline"
+              href="https://www.linkedin.com/in/simone-sanseverino"
+              target="_blank"
+              >LinkedIn</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- ABOUT -->
+      <section id="about">
+        <div class="section-label">Chi sono</div>
+        <div class="about-grid">
+          <p class="about-text">
+            Full Stack Web Developer con una solida base in
+            <strong>PHP, Laravel, MySQL e JavaScript</strong>, costruita
+            attraverso il percorso intensivo Hackademy di Aulab (400 ore).<br /><br />
+            Ho completato il corso sviluppando una piattaforma e-commerce
+            internazionale per il mercato second-hand, applicando metodologie
+            Agile e lavorando su architetture reali.<br /><br />
+            Sono una persona organizzata, orientata al risultato e con una forte
+            disciplina nell'apprendimento. Attualmente sto approfondendo
+            <strong>Java</strong> per lo sviluppo di sistemi enterprise.
+          </p>
+          <div class="about-aside">
+            <div class="aside-item">
+              <span class="aside-key">Posizione</span>
+              <span class="aside-val"
+                >Adelfia, Puglia — disponibile da remoto</span
+              >
+            </div>
+            <div class="aside-item">
+              <span class="aside-key">Formazione</span>
+              <span class="aside-val"
+                >Hackademy Full Stack — Aulab (400h, 2026)</span
+              >
+            </div>
+            <div class="aside-item">
+              <span class="aside-key">Certificazione</span>
+              <span class="aside-val"
+                >Full Stack Web Developer · ID 179686927</span
+              >
+            </div>
+            <div class="aside-item">
+              <span class="aside-key">Shopify</span>
+              <span class="aside-val">Partner certificato</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills">
+        <div class="section-label">Competenze</div>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-cat">Backend</div>
+            <div class="skill-list">
+              PHP 8.4 · Laravel 13<br />MySQL · REST API · OOP
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-cat">Frontend</div>
+            <div class="skill-list">
+              JavaScript · Livewire 3<br />Bootstrap 5 · HTML5 · CSS3 · Blade
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-cat">Tools & metodologie</div>
+            <div class="skill-list">
+              Git · GitHub · Agile<br />Vite · Mailtrap
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-cat">E-commerce</div>
+            <div class="skill-list">
+              Shopify · Stripe<br />Laravel Storage · Spatie Image
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-cat">AI & Cloud</div>
+            <div class="skill-list">
+              Google Cloud Vision API<br />Face Detection · Safe Search
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-cat">In apprendimento</div>
+            <div class="skill-list">
+              Java · Sistemi enterprise<br />Architetture scalabili
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECT -->
+      <section id="project">
+        <div class="section-label">Progetto</div>
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-badge">Progetto finale · 2026</div>
+            <div class="project-title">Presto.it</div>
+            <p class="project-desc">
+              Marketplace per comprare e vendere articoli di ogni tipo. Annunci
+              moderati da revisori umani con supporto AI per l'analisi
+              automatica delle immagini, pagamenti integrati con Stripe e
+              sistema di ruoli avanzato.
+            </p>
+          </div>
+          <div class="project-features">
+            <div class="feature">
+              <span class="feature-icon">🤖</span>
+              <div class="feature-title">Google Vision AI</div>
+              <div class="feature-desc">
+                Oscuramento volti, etichette automatiche e rilevamento contenuti
+                espliciti con Safe Search.
+              </div>
+            </div>
+            <div class="feature">
+              <span class="feature-icon">💳</span>
+              <div class="feature-title">Pagamenti con Stripe</div>
+              <div class="feature-desc">
+                Checkout integrato in modalità test con conferme e cancellazioni
+                via email su Mailtrap.
+              </div>
+            </div>
+            <div class="feature">
+              <span class="feature-icon">👥</span>
+              <div class="feature-title">Sistema revisori</div>
+              <div class="feature-desc">
+                Ruoli dedicati, pannello di moderazione con approvazione/rifiuto
+                e possibilità di annullare l'ultima azione.
+              </div>
+            </div>
+            <div class="feature">
+              <span class="feature-icon">🎨</span>
+              <div class="feature-title">Design system</div>
+              <div class="feature-desc">
+                Palette personalizzata coerente su tutta la piattaforma con
+                identità visiva dedicata.
+              </div>
+            </div>
+          </div>
+          <div class="project-stack">
+            <span class="stack-label">Stack</span>
+            <span class="tag">Laravel 13</span>
+            <span class="tag">PHP 8.4</span>
+            <span class="tag">Livewire 3</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Bootstrap 5.3</span>
+            <span class="tag">Stripe</span>
+            <span class="tag">Google Vision</span>
+            <span class="tag">Mailtrap</span>
+            <span class="tag">Vite</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="section-label">Contatti</div>
+        <div class="contact-grid">
+          <div>
+            <h2 class="contact-heading">Parliamoci.</h2>
+            <p class="contact-sub">
+              Sono aperto a nuove opportunità lavorative, collaborazioni
+              freelance e progetti interessanti nel mondo dello sviluppo web.
+            </p>
+          </div>
+          <div class="contact-links">
+            <a
+              class="contact-link-row"
+              href="mailto:simonesanseverino45@gmail.com"
+            >
+              <span class="contact-link-label">Email</span>
+              <span class="contact-link-val"
+                >simonesanseverino45@gmail.com</span
+              >
+            </a>
+            <a
+              class="contact-link-row"
+              href="https://github.com/simonesanseverino96"
+              target="_blank"
+            >
+              <span class="contact-link-label">GitHub</span>
+              <span class="contact-link-val">simonesanseverino96</span>
+            </a>
+            <a
+              class="contact-link-row"
+              href="https://www.linkedin.com/in/simone-sanseverino"
+              target="_blank"
+            >
+              <span class="contact-link-label">LinkedIn</span>
+              <span class="contact-link-val">simone-sanseverino</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2026 Simone Sanseverino — Full Stack Web Developer</p>
+    </footer>
+  </body>
+</html>
